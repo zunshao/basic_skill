@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css basic</title>
+    <link rel="stylesheet" href="../reset.css" type="text/css">
+    <link rel="stylesheet" href="./style.css" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <h6>利用伪元素获取HTML元素属性，并做相关显示</h6>
+        <div data-msg="when hover, show text!" class="hover-show">hover</div>
+        <a class="showHttp" href="http://127.0.0.1:9001"></a>
+    </div>
+    
+    <div class="container">
+        <h6>css 单位 rem,em,vh,vm,vmin,vmax</h6>
+        <ul class="detail">
+            <li><a>em:</a>相对于父元素font-size</li>
+            <li><a>rem:</a>r为root的意思，body元素font-size。@html元素上设置亦可，注意css样式查找原理</li>
+            <li><a>vh:</a>当前viewport，高度height 1/100</li>
+            <li><a>vw:</a>当前viewport，宽度width 1/100</li>
+            <li><a>vmin&vmax</a>当前viewport，两都是取width/height值1/100。vmin取宽或高的最小值，vmax表示取宽或度的最大值</li>
+        </ul>
+    </div>
+
+
+</body>
+</html>
