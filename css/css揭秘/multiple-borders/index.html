@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .test1{
+            width: 30vw;
+            height: 30vw;
+            margin:10vw;
+            cursor: pointer;
+            border-radius: 5px;
+            float: left;
+            background: yellowgreen;
+            box-shadow: 0 0 0 10px #655,
+                        0 0 0 15px deeppink,
+                        0 2px 5px 15px rgba(0,0,0,.6);
+        }
+        .test2{
+            width: 20vw;
+            height: 20vw;
+            padding: 10px;
+            background: black;
+            border-radius: .5vw;
+            outline: 1px dotted #fff;
+            outline-offset: -10px;
+            float: left;
+            color: #fff;
+        }
+        .test3{
+            width: 20vw;
+            height: 20vw;
+            margin-left: 50px;
+            border-radius: 10px;
+            outline: 10px solid green;
+            box-shadow: 0 0 0 10px green;
+            background: #655;
+            float: left;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="test1">
+        box-shadow:h-shadow v-shadow blur spread color [outset/inset];<br/>
+        注意：<br> 
+            （1）元素外需有足够非其它元素占据空间提供给多重边框;<br>
+            （2）故意添加css cursor,多重边框非当前元素所属，事件类推<br>
+            （3）若内增长，注意通过padding,以获复合理content width
+    </div>
+    <div class="test2">
+        outline:width style color<br/>
+        outline-offset:正/负<br/>
+        优点：<br/>
+            （1）存在outline-style属性<br/>
+        缺点：<br/>
+            （1）只有两层
+            （2）无法圆角
+    </div>
+    <div class="test3">
+        内侧圆角<br/>
+        实现方法：<br/>
+            （1）两个DIV元素<br/>
+            （2）box-shadow 与 outline结合使用<br/>
+    </div>
+</body>
+</html>
