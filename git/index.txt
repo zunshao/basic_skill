@@ -1,0 +1,13 @@
+（1）config username and email
+	$ git config --global user.name "name"
+	$ git config --global user.email "email"
+
+（2）如何对特定仓库采用特定的GIT账号
+	修改 .git/config
+	[user]
+	name = myName
+	email = myEmail
+	
+（3）远程强制覆盖本地
+	$ git fetch --all
+	$ git reset --hard origin/"your branchName"

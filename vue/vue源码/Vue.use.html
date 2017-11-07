@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.use</title>
+</head>
+<body>
+<script>
+    Vue.use = function (plugin) {
+        if (plugin.installed) {
+            return
+        }
+        var args = toArray(arguments, 1);
+        args.unshift(this)
+        if (typeof plugin.install === "function") {
+            plugin.install.apply(plugin, args)
+        } else if (typeof plugin === 'function') {
+            plugin.apply(null, args)
+        }
+        plugin.installed = true
+        return this
+    }
+
+    function toArray(list, start = 0) {
+        var i = list.length - start;
+        var ret = new Array(i);
+        while (i--) {
+            ret[i] = list[i + start]
+        }
+        return ret
+    }
+
+    /*
+    * @plugin 为一个函数或对象，对象的install属性为一个方法
+    * @plugin 的 installed属性，为一个是否已注册的指针，不允许重复注册
+    * @如何传参，在Vue.use(plugin,...args) args为plugin的参数@@@注意学习这种思路
+    * @执行思路，每一个参数为函数表达式，后续为其参数。通过toArray转化（得到传入函数参数的数组），产生新的数组，且不改变arguments对象
+    * @通过 apply 将函数表达式与 toArray得到的参数真实数组合。
+    * */
+</script>
+<script>
+    var tem = [
+        {
+            points:[{"lng":121.597787,"lat":31.618703},{"lng":121.635731,"lat":31.608863},{"lng":121.71162,"lat":31.570475},{"lng":121.628832,"lat":31.551275}],
+            area:'崇明'
+        },
+        {
+            points:[{"lng":121.275834,"lat":31.410232},{"lng":121.333901,"lat":31.382615},{"lng":121.40404,"lat":31.348081}],
+            area:'嘉定'
+        },
+        {
+            points:[{"lng":121.452333,"lat":31.190049}],
+            area:'徐汇'
+        },
+        {
+            points:[{"lng":121.556968,"lat":31.227606},{"lng":121.593762,"lat":31.233534}],
+            area:'浦东'
+        },
+        {
+            points:[{"lng":121.390242,"lat":31.113406}],
+            area:'闵行'
+        }
+    ]
+</script>
+</body>
+</html>
