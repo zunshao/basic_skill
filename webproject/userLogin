@@ -1,0 +1,51 @@
+****很多公司的用户系统做的没眼看，注意思路****
+
+多项目采用一套登录系统
+SSO CAS
+SSO single sign cas
+CAS client server service 存在 CAS1.0协议
+
+一 同域SSO
+  存在产品 A B
+  用户通过A登录，response header中添加 cookie 域暂定为 XX.cn。用户访问B产品时，服务器通过验证cookie来验证登录状态
+
+二 同父域SSO
+  A，B产品位于同父域。
+  把cookie的domain设置为其父域。
+  此方案本质上与同域SSO没有区别
+
+三 跨域 存在标准CAS标准方案
+  基本思路设置专门的SSO服务器
+  存在产品AB
+  用户访问A，登录
+  用户访问B，服务器拿到cookie domain可以设置标识符，服务器重定向至SSO服务器。进一步验证。
+
+  三个关键字
+  TGT ticket granting ticket
+  用于用户登录时放置于cookie中
+
+  TGC ticket granting cookie
+  将用户cookie中 TGT生成session标识符
+
+  ST service ticket
+  用户请求服务的验证
+
+详细步骤：
+  用户访问产品a
+    请求A资源服务器，没有cookie，返回重定向指向SSO（注意A资源服务器应该告诉SSO服务器A资源相关标识）
+    SSO没有发现TGC（sesstion），返回登录界面
+    登录成功，返回TGT（cookie中），返回A资源的重定向（SSO此时已知A标识），同时包括A资源的ST权限
+    SSO服务器 生成TGC（session标识）
+    此时，A带着ST访问其拿到的资源
+    浏览器cookie存在 TGT
+    SSO服务器存在用户 TGC
+
+    用户请求资源B
+    cookie有TGT
+    sso服务器存在 TGC
+    通过sso服务器TGC相关验证 返回带B资源ST的重定向即可
+
+注意 几次重定向，注意TGT TGC ST的含义。
+
+参考：https://juejin.im/post/5a002b536fb9a045132a1727
+

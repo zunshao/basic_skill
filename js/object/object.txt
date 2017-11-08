@@ -1,0 +1,46 @@
+1, Object.keys()
+    语法：Object.keys(obj)
+    参数：obj 要返回其枚举自身属性的对象
+    返回值：参数可枚举属性组成的字符串数组
+    常见问题：（1）与for - in区别
+                  for-in可枚举其可继承属性，Object.keys()只返回自属性
+            （2）参数对象不是object的如何处理？
+                  ES2015，参考for-in，但不包含其继承属性
+2, Object.prototype.constructor
+    得到当前实例对象的构造函数
+    注意其非值，而是对构造函数的引用
+    注意其比较容易被重写，查看./index.html文件
+    注意 var person = new Person()
+    console.log(person.constructor)//输出的为new Person构造函数
+    实际上person通过person.__proto__ 指向 Person().prototype
+    Person().prototype 存在 constructor方法,输出Person()本身
+
+3, Object.freeze()
+    锁定对象属性，禁止修改
+    注意：其为浅锁定
+    var a = {a: 1}
+    Object.freeze(a)
+    a.a = 3
+    console.log(a.a)//1
+
+    var b = {a: {c: 1}}
+    Object.freeze(b)
+    b.a.c = 3
+    console.log(b.a.c) //3
+
+4, Object.is()
+    判断两个值是否相等
+    与 == 不同
+    因为若等式两边不同，将做隐式转换
+    与 === 不同 NaN !==NaN //true
+
+5, Object.create()
+    Object.create()的实现方式如下：
+      Object.create = function (o) {
+        var F = function () {};
+        F.prototype = o;
+        return new F();
+      }
+
+    用法：a = Object.create(b);
+        相当于 a.__proto__ = b;
