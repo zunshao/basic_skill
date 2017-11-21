@@ -156,3 +156,25 @@
         })
     }
 ```
+### axios reponse 数据结构
+```
+    {
+        data: {},
+        status: 200,
+        statusText: 'ok',
+        headers: {}，
+        config: {} //axios config
+    }
+    //可以通过以下方式打开查看
+    axios.get('/users/12345')
+    .then(function(response){
+        console.log(response.data)
+        console.log(response.status)
+        console.log(response.statusText)
+        console.log(response.header)
+        console.log(response.config)
+    })
+```
+
+### axios interceptors拦截器
+### axios cancellation 取消
