@@ -19,6 +19,8 @@
 + 当前分支提交
     + git pull origin <"branchname">
     + git add --all//后续修改
+        + git status
+        + git diff
     + git commit -am "message"
     + git push origin <"branchname">
 + 向其它分支合并
