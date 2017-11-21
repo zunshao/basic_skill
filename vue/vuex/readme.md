@@ -103,11 +103,11 @@ export default {
     ...
 }
 ```
-### 将vuex实例化参数分离
+### 将vuex实例化参数commonJS规范分离
 ##### 由上我们了解vuex实例化的基本结构，运用Es6 commonJS规范很容易将其拆分
 + 创建 store文件夹 入口index.js 具体 state.js, mutations.js, actions.js, getters.js, module文件夹（后续说明）
-+ index.js 将 具体四个JS及module引入，抛至main.js 被 Vue引用
-+ module作用 很多时候我们项目可以被几个大功能或是由几个人共同开发，各自维护一套比较合理
++ index.js 将具体四个JS及module引入，抛至main.js 被 Vue引用
++ module作用 很多时候我们项目可以分为几个大功能或是由几个人共同开发，各自维护比较合理
 + 如何访问module中的state? this.$store.map.state map为module的别名，详见下文代码
 + ？？疑问：mutation-types .js 有什么用？全局避免重复？actions 没有？
 ```js
@@ -148,5 +148,5 @@ new Vue({
 })
 ```
 ### plugins 待补充
-### 个人认为不要为了使用vuex而使用。从实际使用过程中来看，正常子父 父子间通信可满足一半以上的需求
+### 个人认为不要为了使用vuex而使用。从实际使用过程中来看，正常子父、父子间通信可满足一半以上的需求
         
