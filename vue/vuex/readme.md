@@ -77,6 +77,7 @@ obj = {
 import { mapState, mapMutations, mapActions, mapGetters} from 'vuex'
 export default {
     ...
+    //四个分为两外，不要写错
     computed: {
         ...mapState(['text'])//数组直接
         ...mapState({textAlias: 'text'})//对象别名
@@ -146,6 +147,26 @@ new Vue({
     store
     ...
 })
+```
+### 补充Mutations
++ mapMutations 在 methods内
++ 官方概念 更改Vuex的store中的状态唯一方法是提交mutations.可以采用this.$store.state直接改，不建议
++ mapState的state值，无法修改
++ 对象风格的提交方式与概念最相近 this.$store.commit({type:'increament', amount:10}) //type字符串 为mutations下函数名
++ 传参，只接受一个参数。建议对象
++ 使用常量替 mutation type,不建议建议使用如下写法：
+```
+    //修改State值,一个函数解决所有问题
+    mutations: {
+        someMutation(state, para) {
+            if (para['stateProperty']) {
+                state[para.stateProperty] = para.value
+            } else {
+                console.log('params should have property "stateProperty"')
+            }
+        }
+        //stateProperty 要修改的state属性名称
+    }
 ```
 ### plugins 待补充
 ### 个人认为不要为了使用vuex而使用。从实际使用过程中来看，正常子父、父子间通信可满足一半以上的需求
