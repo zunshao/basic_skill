@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		.container{
+			width:500px;
+			height:600px;
+			border: 1px solid saddlebrown;
+			margin:50px auto;
+		}
+		.inputContainer{
+			width:200px;
+			margin: 20px auto;
+		}
+		.showStr{
+			display: inline-block;
+			width:100%;
+		}
+		.keySetContainer{
+			width:400px;
+			height:325px;
+			background: aquamarine;
+			margin: 50px auto;
+			overflow: hidden;
+			padding-top:50px;
+		}
+		.keyDetail{
+			display: inline-block;
+			width:120px;
+			line-height:30px;
+			float:left;
+			margin-right:20px;
+			margin-bottom: 50px;
+			background: dodgerblue;
+			text-align: center;
+			cursor: pointer;
+		}
+		.keyDetail:nth-child(3n){
+			margin-right:0;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="inputContainer">
+		<input type="text" class="showStr">
+	</div>
+	<div class="keySetContainer" onselectstart="return false;">
+		<div class="keyDetail">1</div>
+		<div class="keyDetail">2abc</div>
+		<div class="keyDetail">3def</div>
+		<div class="keyDetail">4ghi</div>
+		<div class="keyDetail">5jkl</div>
+		<div class="keyDetail">6mno</div>
+		<div class="keyDetail">7pqrs</div>
+		<div class="keyDetail">8tuv</div>
+		<div class="keyDetail">9wxyz</div>
+		<div class="keyDetail">*</div>
+		<div class="keyDetail">0</div>
+		<div class="keyDetail">#</div>
+	</div>
+</div>
+</body>
+<script>
+	let showStr = document.querySelector('.showStr');
+	let keySetContainer = document.querySelector('.keySetContainer');
+	let timer = null;
+	let activeObj = {
+						dom:null,//clicked dom
+						num:0,//when click same button,record click num
+						timerNum:0,// record time
+					};
+
+	function timerFn(obj) {
+		timer = setTimeout(function () {
+			if(obj.timerNum <10){
+				obj.timerNum += 1;
+				timerFn(obj);
+			}else{
+				reset(obj);
+			}
+		},100);
+	}
+	function reset(obj) {
+		clearTimeout(timer);
+		timer = null;
+		obj.timerNum = 0;
+		obj.dom = null;
+		obj.num = 0;
+	}
+	keySetContainer.onclick = function (e) {
+		if(e.target.className === 'keyDetail') {
+			let temStr = e.target.innerHTML;
+			if(!timer){ //未计时，开始计时
+				timerFn(activeObj);
+			}
+			if(!activeObj.dom) {//first click
+				activeObj.dom = e.target;
+				showStr.value += temStr[activeObj.num];
+			}else if(activeObj.dom.innerHTML === temStr) {//click same
+				activeObj.num += 1;
+				if(timer) {//计时中，修改末位
+					showStr.value = showStr.value.substr(0,showStr.value.length-1)+temStr[activeObj.num%(temStr.length)];
+				}
+			}else{ //click different
+				reset(activeObj);
+				activeObj.dom = e.target;
+				showStr.value += e.target.innerHTML[activeObj.num];
+			}
+		}
+	}
+</script>
+
+</html>
