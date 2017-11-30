@@ -1,8 +1,9 @@
 ### 题目
 ![](./图片1.png)
+
 ######用任意编程语言（javascript为佳）写一个程序，解决下面问题
 Given a digit string, return all possible letter combinations that the number could represent.A mapping of digit to letters (just like on the telephone buttons) is given below.
-###### 参考图片‘./图片1.png’
+
 + Input:Digit string "23"
 + Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 
