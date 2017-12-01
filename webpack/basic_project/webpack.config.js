@@ -1,30 +1,53 @@
-var path = require("path");
-var htmlWebpackPlugin = require('html-webpack-plugin');
-
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
-    entry: "./src/main.js",
+    entry: path.resolve(__dirname, './src/js/app.js'),
     output: {
-        path: path.resolve(__dirname, "./build"),
-        filename: "js/[name]-[chunkhash].js"
+        path: path.resolve(__dirname, './dist'),
+        filename: 'js/[name]-[chunkhash:8].js'
     },
     module: {
-        loaders: [
-            /*{
-                test: /.css$/,
-                loaders: ['style-loader', 'css-loader'],
-                exclude: '/node-modules/'
-            }*/
+        rules: [
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ["css-loader", "postcss-loader"]
+                }),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ["css-loader", "postcss-loader", "less-loader"]
+                }),
+                exclude: /node_modules/
+            },
+            {
+                test: /\.js$/,
+                loader: "babel-loader",
+                exclude: /node_modules/
+            }
         ]
     },
     plugins: [
-        /*new htmlWebpackPlugin({
-            filename: 'a.html',
+        new ExtractTextPlugin({
+            filename: 'css/[name].[hash:8].css'
+        }),
+        new HtmlWebpackPlugin({
             template: 'index.html',
-            inject: false,
-            title: 'learn webpack'
-        }),*/
+            filename: 'index.html'
+        }),
+        new CleanWebpackPlugin(
+            ['dist'],
+            {
+                root: __dirname,
+                verbose: true,
+                dry: false
+            }
+        ),
     ],
-    resolve: {
-        extensions: ['.js', '.css', '.png', '.html', '.jsx']//可以省略文件后缀名
-    }
-};
+}

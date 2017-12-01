@@ -1,0 +1,10 @@
+# dependency directors
+node_modules/
+
+# IDE settings
+.idea
+.vscode
+
+# build documents
+dist/
+
