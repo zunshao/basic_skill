@@ -1,7 +1,7 @@
 ### 题目
 ![](./图片1.png)
 
-######用任意编程语言（javascript为佳）写一个程序，解决下面问题
+###### 用任意编程语言（javascript为佳）写一个程序，解决下面问题
 Given a digit string, return all possible letter combinations that the number could represent.A mapping of digit to letters (just like on the telephone buttons) is given below.
 
 + Input:Digit string "23"
@@ -39,4 +39,4 @@ console.log(getOutPut(inputData,arrayTest))
         + 在地图瓦片下载的项目中，遇到类似的问题
         + NODE中，尽管有bagpipe 可以控制并发，如上10亿量级，整个任务队列还是要在内存中维持的
         + bagpipe 上限大约 500万，async/await单异步，100万左右就挂掉了
-        + 具体解决思路NODE bigpipe 解决
+        + 具体解决思路NODE bigpipe 表述
