@@ -40,3 +40,4 @@ console.log(getOutPut(inputData,arrayTest))
         + NODE中，尽管有bagpipe 可以控制并发，如上10亿量级，整个任务队列还是要在内存中维持的
         + bagpipe 上限大约 500万，async/await单异步，100万左右就挂掉了
         + 具体解决思路NODE bigpipe 表述
+
