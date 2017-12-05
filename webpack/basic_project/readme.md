@@ -13,4 +13,14 @@
 + extract-text-webpack-plugin
     + fallback: "style-loader"
     + html-webpack-plugin 将对任何css输出自动通过<link>注入到html中
-    + 对于loader中使用多次，最终plugin中存在一次的话，将自动合并为一个文件        
+    + 对于loader中使用多次，最终plugin中存在一次的话，将自动合并为一个文件
++ loader
+    + 注意写法灵活多变
+    + rules 处只有 loader
+    + 部分插件 loaders: []; loader: 'string'
++ HappyPack
+    + 添加id
+    + 需配合使用 threadPool
+    + ???越优化打包时间多长？有可能是测试项目本身比较少
++ UglifyJSPlugin
+    + sourcmap暂时不可用，不知为何        
