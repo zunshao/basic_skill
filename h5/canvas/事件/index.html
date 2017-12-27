@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #ddd;
+            padding-top: 100px;
+        }
+        #canvas{
+            display: block;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid rgba(100, 150, 230, 0.5);
+            cursor: pointer;
+        }
+        #readout{
+            margin-top: 20px;
+            margin-left: 15px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="readout"></div>
+<canvas id="canvas" width="500" height="300"></canvas>
+<script>
+    const canvas = document.querySelector('#canvas'),
+        readout = document.querySelector('#readout'),
+        context = canvas.getContext('2d'),
+        spriteSheet = new Image();
+
+    function windowsToCanvas(canvas, x, y) {
+        var bBox = canvas.getBoundingClientRect();// 得到元素与窗体位置关系对象 [left, top, bottom, right, width, height]
+        return {
+            x: x - bBox.left * (canvas.width / bBox.width),
+            y: y - bBox.top * (canvas.height / bBox.height)
+        }
+    }
+
+    function drawBackground() {
+        /*绘制状态*/
+        const Vertical_Line_Space = 12;
+        let i = context.canvas.height;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.strokeStyle = 'lightgray';
+        context.lineWidth = 0.5;
+
+        /*绘制背景线*/
+        while (i > Vertical_Line_Space * 4) {
+            context.beginPath();
+            context.moveTo(0, i);
+            context.lineTo(context.canvas.width, i);
+            context.stroke();
+            i -= Vertical_Line_Space;
+        }
+    }
+    drawBackground();
+
+    /*绘制水平垂直线*/
+    function drawVerticalAndHorizontalLine(x, y) {
+        context.strokeStyle = 'rgba(0,0,230,0.8)';
+
+        context.beginPath();
+        context.moveTo(0, y + 0.5);
+        context.lineTo(context.canvas.width, y + 0.5);
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(x + 0.5, 0);
+        context.lineTo(x + 0.5, context.canvas.height);
+        context.stroke();
+    }
+
+    /*添加充坐标*/
+    function updateReadout(x, y) {
+        readout.innerHTML = '(' + x.toFixed(0) + ', ' + y.toFixed(0) + ')';
+    }
+
+    /*鼠标移动事件*/
+    canvas.onmousemove = function (e) {
+        var loc = windowsToCanvas(canvas, e.clientX, e.clientY);
+        drawBackground()
+        context.drawImage(spriteSheet, 0, 0);
+        drawVerticalAndHorizontalLine(loc.x, loc.y);
+        updateReadout(loc.x, loc.y);
+    }
+    /*添加背景图*/
+    spriteSheet.src = './running-sprite-sheet.png';
+    spriteSheet.onload = function () {
+        context.drawImage(spriteSheet, 0, 0)
+    }
+</script>
+</body>
+</html>
