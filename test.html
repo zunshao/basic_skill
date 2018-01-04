@@ -6,26 +6,11 @@
 </head>
 <body>
 <script>
-    function run(createIterator) {
-        let task = createIterator();
-        let result = task.next()
-
-        function step() {
-            if (!result.done) {
-                result = task.next()
-                step()
-            }
-        }
-        step();
+    var array = [1,8,3,40,5,4,9]
+    var arrayI = array.entries()
+    for(let i of arrayI) {
+        console.log(i[0], i[1])
     }
-
-    run(function *() {
-        console.log(1)
-        yield;
-        console.log(2)
-        yield;
-        console.log(3)
-    })
 </script>
 </body>
 </html>
