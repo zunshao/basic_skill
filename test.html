@@ -6,11 +6,11 @@
 </head>
 <body>
 <script>
-    var array = [1,8,3,40,5,4,9]
-    var arrayI = array.entries()
-    for(let i of arrayI) {
-        console.log(i[0], i[1])
-    }
+    var array = ['1',1,8,3,40,5,4,9]
+    var arrayI = array.every(function (a) {
+        console.log(a)
+    })
+    console.log(array.indexOf(1))
 </script>
 </body>
 </html>
