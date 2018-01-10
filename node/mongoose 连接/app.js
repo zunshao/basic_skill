@@ -22,7 +22,15 @@ instanceLocalModel.name = 'zhang'
 promise.then(function (doc) {
     console.log(doc)
 })*/
+
+/*// save
 instanceLocalModel.save(function (err) {
     if(err) throw err
     else console.log('ok')
+})*/
+
+// find
+localModel.find({}, function (err, doc) {
+    console.log('OK')
+    console.log(typeof doc)
 })
