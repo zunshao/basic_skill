@@ -21,7 +21,7 @@
             console.log(3)
             console.log(resolve)
         }, 0)
-        return false
+        return Promise.reject()
     }).then(function (resolve) {
         console.log(resolve)
     }, function () {
