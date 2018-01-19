@@ -10,5 +10,5 @@
 ## webpack-node-externals
 
 * webpack 使用处理文件时，exclude include
-* 接上，尤其处理 node-module 文件夹时
+* 接上，尤其处理 node-modules 文件夹时
 * 如果要在 exclude include 增加白名单（whitelite）可以用到上述
