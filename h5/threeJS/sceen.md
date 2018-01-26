@@ -51,9 +51,4 @@ this.removeCube = function() {
         + cube.position.set(10, 2, 3)
         + cube.position = new THREE.Vector(10, 2, 3)
         
-## camera
-+ 分为两种
-    + 透视 与我们人眼真实效果一致，远处渲染的越小，一般场景应用
-    + 正投 远近物体渲染尺寸一致，某此游戏， 一些智慧城市
-+ camera.lookAt(position)
     
