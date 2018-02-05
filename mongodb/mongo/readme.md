@@ -25,6 +25,7 @@
     httpinterface = true
 ```
 > 上述完成后，启动过程如下：
-+ mongod --config e:\mongodb\data
++ mongod --config e:\mongodb\etc\mongo.conf
+    + 指向 mongodb 配置路径
 + mongo
     + 可以在当前命令界面进行相关数据库操作
