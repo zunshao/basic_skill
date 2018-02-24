@@ -20,3 +20,44 @@ aa(1, function(b) {
     + 参数没有，表达中使用为、全局变量，某些特定情况下，修改全局变量即可
     + 使用一层匿名函数，函数表达式为functionName(para)的形式。建议这种方法
     + 如果存在remove的情况？建议将上述匿名改为有名，再包一层。
+    
+    
+> Array.every polyfill, 主要学习callback的写法
+```javascript
+if (!Array.prototype.every) {
+    Array.prototype.every = function(callbackfn, thisArg) {
+      'use strict';
+      var T, k;
+      if (this == null) {
+          throw new TypeError('this is null or not defined!')
+      }
+      
+      var O = Object(this);
+      var len = O.length >>> 0;
+      // 位操作与 len = O.length || 0; 区别很大，此为尝试取一个默认值
+      // >>> 尝试进行一次位操作，无法操作 取0， 
+      if (typeof callbackfn !== 'function') {
+          throw new TypeError();
+      }
+      
+      if (arguments.length > 1) {
+          T = thisArg;
+      }
+      
+      k = 0;
+      
+      while (k < len) {
+          var kValue;
+          if (k in O) {
+              kValue = O[k];
+              var testResult = callbackfn.call(T, kValue, k, O);
+              if (!testResult) {
+                  return false;
+              }
+          }
+          k++;
+      }
+      return true;
+    }
+}
+```
