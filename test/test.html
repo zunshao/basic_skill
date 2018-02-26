@@ -6,31 +6,20 @@
 </head>
 <body>
 <script>
-    let doSth = new Promise((resolve, reject) => {
-        console.log(1)
-        resolve(111)
-    })
+    function add(x) {
+        var re = x;
+        var fn = function (y) {
+            re += y;
+            return fn;
+        }
+        fn.toString = function () {
+            return re;
+        }
+        return fn;
+    }
+    var b = add(1)(2)(3);
 
-    /*setTimeout(function () {
-        doSth.then(function () {
-            console.log(2)
-        })
-    }, 2000)*/
-    doSth.then(function (resolve) {
-        setTimeout(function () {
-            console.log(3)
-            console.log(resolve)
-        }, 0)
-        return Promise.reject()
-    }).then(function (resolve) {
-        console.log(resolve)
-    }, function () {
-        console.log('aaaaaaa')
-    }).then(function () {
-        console.log(4)
-    }).then(function () {
-        console.log(4)
-    })
+    console.log(b, parseInt(b), typeof b)
 
 </script>
 </body>

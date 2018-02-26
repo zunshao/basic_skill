@@ -9,3 +9,11 @@
 * node 构成
   * v8 引引擎部分 // 与浏览器内核部分类似
   * libuv // 与系统交互部分，也可以理解为 v8 部分与文件操作等其它能力，通过 libuv 部分额外补充
+  
+### node 组成部分（由上至低层）
++ node.js api
++ native modules(JS)
++ v8
++ bindings(c++)
++ libuv(io) // 比浏览器纯V8复杂的部分，可以跟系统内核对话。libuv主要负责系统内核任务调度及其回调函数执行时间。
++ OS
