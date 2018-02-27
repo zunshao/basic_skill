@@ -39,3 +39,57 @@ function require(...params) {
   return module.exports
 }
 ```
+> require 完整写法
+```javascript
+function $require(id) {
+  const fs = require('fs');
+  const path = require('path');
+  const filename = path.join(__dirname, id);
+  $require.cache = $require.cache || {};
+  
+  // if cache
+  if ($require.cache[filename]) {
+      return $require.cache[filename].exports;
+  }
+  
+  // no cache
+  const dirname = path.dirname(filename);
+  let code = fs.readFileSync(filename, 'utf8');
+  let module = {id: filename, exports: {}}
+  let exports = module.exports
+  code = `
+  (function($require, module, exports, __dirname, __filename) {
+    ${code}
+  })($require, module, exports, dirname, __filename)
+  `
+  eval(code)
+  
+  // cache module
+  $require.cache[filename] = module
+  return module.exports;
+}
+```
+> 上述如何使用？
+```javascript
+setInterval(() => {
+  
+  // 清除缓存，很重要
+  // Object.keys(require.cache).forEach((key)=>{
+  //   delete require.cache[key];
+  // });
+  
+  var date = $require('./module/date.js');
+  console.log(date.getTime());
+}, 1000);
+```
+
+### require文件查找的一般规则
++ 以./ ../ 或 /开头（./ ../ 相对路径， /绝对路径）
+    + 文件夹（权限大于带后缀文件名）
+        + 默认index.js
+        + package.json{main: 'str'} main路径存在，则main路径下的文件 权限大于 index.js 
+    + 无后缀 （权限小于同名文件夹） 
+        + .js > .json > .node
++ 无/
+    + 系统自带
+    + node_modules
