@@ -34,3 +34,14 @@ process.on('SIGINT', () => {
 /* 
 process.exit() 退出repl环境
 */
+
+/*
+* process.stdout.write('string' + '/n')
+* process.stdin.on('data', function(data) {
+* })
+* process.stdout.write repl控制台打印字符
+* process.stdin.on('data', function(data) {
+*   const data = data.toString().trim()
+* }) // 用来监听 repl输入
+* 注意两个问题：（1）类型为对象，字节流； （2）内容包括一个回车符,toString()转成字符，trim()去掉两端的空符
+* */

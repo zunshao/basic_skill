@@ -61,3 +61,37 @@ if (!Array.prototype.every) {
     }
 }
 ```
+
+> callback常见插件及异步回调中的有法
+```javascript
+function isOddOrEvenAsync(number, callback) {
+  if (number && typeof number === 'number') {
+      if (number % 2) {
+          callback(null, '奇数')
+      } else {
+          callback(null, '偶数')
+      }
+  } else {
+      callback(new Error('you send wrong parameters!'))
+  }
+}
+
+isOddOrEvenAsync(19, function(error, msg) {
+  if (error) {
+      console.log(error);
+      return false;
+  }
+  console.log(msg)
+})
+```
+### 由上述代码总结
++ 对于回调函数
+    + 参数末位依次写callback
+    + 其它参数是 抽象的
+    + 具体的表达式，更多体现在如何以不同的参数（格式一致）调用callback，callback对于主函数而言是抽象的
+    + callback 参数是具体的
++ 实际运行函数
+    + callback函数表达式是具体的，参数是抽象的
+    + 其它参数是具体的
+    + 对于callback参数，错误优先原则，即第一个参数一般为error
+    + 错误优先的原因：异步函数过程中，发生错误throw出来的error,主程无法直接拿到，可以抛给回调，然后在事件循环中执行异步回调，拿到。
