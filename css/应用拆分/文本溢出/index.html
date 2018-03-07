@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .singleLine{
+            width: 500px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1;
+        }
+        .multipleLine{
+            width: 200px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+        }
+        div{
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="singleLine"><a style="color:red;">单行文本溢出省略号</a>现单行文本的溢出显示省略号同学们应该都知道用text-overflow:ellipsis属性来</div>
+    <div class="multipleLine"><a style="color:blue;">多行文本溢出省略号</a>现单行文本的t-overflow:el溢出显文本的溢出显文本的溢出显文本的溢出显文本的溢出显文本的溢出显示省略号同学们应该都知道</div>
+</body>
+</html>

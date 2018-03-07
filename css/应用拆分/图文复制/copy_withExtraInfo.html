@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="box">复制的文本 都会被加上一段来源说明</div>
+<script>
+    document.addEventListener('copy', function (event) {
+        event.preventDefault();
+        let temStr = window.getSelection().toString();
+        event.clipboardData.setData("text", `${temStr},by zhangyishao`);
+    })
+</script>
+</body>
+</html>
