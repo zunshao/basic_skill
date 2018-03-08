@@ -8,5 +8,6 @@
     + a.b.call(a, ...array) // 此时，b方法有可能内部存在this 而默认this指向的是a, 所以传a比较保险
 + 举例
     + Array.prototype.slice.apply(arguments,null) 这是改变this指向
-    + Math.max.call(null, array) 借用方法？？？？
+    + Math.max.call(null, array) 改变写参数的形式
+    + 接上 Math.max(...array)也可以，同样是改变写参数的形式
 > 总上 call apply 都可以使用数组，call使用数组扩展符的形式
