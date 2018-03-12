@@ -4,7 +4,7 @@
     返回值：参数可枚举属性组成的字符串数组
     常见问题：（1）与for - in区别
                   for-in可枚举其可继承属性，Object.keys()只返回自属性
-            （2）参数对象不是object的如何处理？
+             （2）参数对象不是object的如何处理？
                   ES2015，参考for-in，但不包含其继承属性
 2, Object.prototype.constructor
     得到当前实例对象的构造函数
@@ -31,7 +31,7 @@
 4, Object.is()
     判断两个值是否相等
     与 == 不同
-    因为若等式两边不同，将做隐式转换
+    因为若==等式两边不同，将做隐式转换
     与 === 不同 NaN !==NaN //true
 
 5, Object.create()
@@ -42,5 +42,13 @@
         return new F();
       }
 
-    用法：a = Object.create(b);
-        相当于 a.__proto__ = b;
+    用法：（1）a = Object.create(b);
+              相当于 a.__proto__ = b;
+          （2）es5 构造函数间的继承，child.prototype = Object.create(parent.prototype, {
+                constructor: {
+                    value: child,
+                    enumerable: true,
+                    writable: true,
+                    configurable: true
+                }
+          })
