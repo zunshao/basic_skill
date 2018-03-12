@@ -24,6 +24,7 @@
         .hover:hover{
             background: aqua;
             width: 300px;
+            cursor: url("./img/2.png"), auto;
         }
         .hover:hover + .input-focus{
             display: none;
@@ -51,7 +52,7 @@
         input[type="text"]:disabled {
             background: red;
         }
-        .brother li + li{
+        .brother li:first-child + li{
             background: darkmagenta;
         }
         .line-p{
@@ -73,14 +74,46 @@
             content: '》';
             color: #009966;
         }
+        .nth-box{
+            overflow: hidden;
+            width: 580px;
+        }
+        .nth-box span{
+            display: inline-block;
+            float: left;
+            height: 100px;
+            width: 100px;
+            background: darkmagenta;
+            vertical-align: baseline;
+        }
+        .nth-box div{
+            margin-top: 0;
+            float: left;
+            height: 100px;
+            width: 100px;
+            background: darkcyan;
+        }
+        .nth-box div:last-child{
+            background: red;
+        }
+        .nth-box div:nth-child(1){
+            background: darkgreen;
+            margin-left: 0;
+        }
+        .nth-box span:nth-child(2){
+            background: deepskyblue;
+        }
+        .nth-box span, .nth-box div{
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="button">active伪类（点我）</div>
-    <div class="hover">hover+过渡
+    <div class="hover">hover+过渡+图片改变光标样式
         <div class="child"></div>
     </div>
-    <input placeholder="focus-test" class="input-focus"/>
+    <input placeholder="focus并控制兄弟元素样式" class="input-focus"/>
 
     <ul class="nth">
         <li><p>first child</p></li>
@@ -91,12 +124,20 @@
     <input type="text" disabled placeholder="test">
     <input type="text"  placeholder="test">
     <ul class="brother">
-        <li><p>brother select</p></li>
-        <li><p>与上对比</p></li>
+        <li><p>brother select++++向下取一个兄弟元素</p></li>
+        <li><p>被取到的兄弟元素</p></li>
         <li><p>first child</p></li>
     </ul>
     <p class="line-p">你换成中文就自动换行了，连续的英文被识别成一个单词，所以只会撑开。</p>
     <p class="line-letter">伪元素测试letter</p>
     <div class="element-test">2046</div>
+
+    <div class="nth-box">
+        <div></div>
+        <span>span</span>
+        <div></div>
+        <span>span</span>
+        <div></div>
+    </div>
 </body>
 </html>
