@@ -12,3 +12,4 @@
 + 接上，如果div 子元素为 span div span
 + 接上，若想取到第二个span 应该为 div span:nth-child(3)
 + 实际操作过程中为防止孙级元素影响，上述写法 div > span:nth-child(3)更为合理
+

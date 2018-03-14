@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .test{
+            width: 200px;
+            height: 200px;
+            background: darkkhaki;
+        }
+    </style>
 </head>
 <body>
+<div class="test"></div>
 <script>
-    var obj = {
-        fn: function() {
-            var _self = this
-            function f(_self) {
-                console.log(_self)
-            }
-            f(this)
-        }
-    }
-    obj.fn()
+    const dom = document.querySelector('.test');
+    dom.addEventListener('click', function () {
+        console.log(this)
+    }, this)
+
 </script>
 </body>
 </html>
