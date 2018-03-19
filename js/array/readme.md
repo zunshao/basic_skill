@@ -46,10 +46,10 @@ for (let e of iterator) {
 ### array.every() 返回boolean值
 + return boolean判断值，如果出现false将立即退出，如果第项为true最终结果为true
 + array.every(function(element, index, array), thisArg)
-+ polyfill 有关于callback的用法，已放止相关md文件中
++ polyfill 有关于callback的用法，已放相关md文件中
 ### array.fill() 改变原数组
 + array.fill(value, start, end) 依次改变数组元素
-### array.find() 返回值，回调return 判断条件 返回第一个满足篥件的
+### array.find() 返回值，回调return 判断条件 返回第一个满足条件的
 + callback 必传
 ### array.findIndex() 返回索引值
 + callback 必传

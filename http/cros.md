@@ -24,7 +24,7 @@
             + 浏览器将抛出错误，此错误不可通过状态码捕获到
         + 指定源在许可范围内，返回将多出如下属性
             + Access-Control-Allow-Origin
-                + 必段，值 要么为* 要么为 请求Origin
+                + 必段，值 要么为 * 要么为 请求Origin
             + Access-Control-Allow-Credentials
                 + 服务端是否接收cookie,接收为true，不接收删掉
             + Access-Control-Expose-Headers

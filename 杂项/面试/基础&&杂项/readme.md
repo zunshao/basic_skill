@@ -26,3 +26,5 @@
     + p:first-letter
     + p:after
     + p:before
+### 如何将一个数组元素 随机排列
++ array.sort(() => Math.random() - 0.5)

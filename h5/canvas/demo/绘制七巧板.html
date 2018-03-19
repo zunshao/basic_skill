@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script>
+    const drawData = [
+        {p: [{x: 0, y:0}, {x: 800, y: 0}, {x: 400, y: 400}], color: '#caff67'},
+        {p: [{x: 0, y:0}, {x: 400, y: 400}, {x: 0, y: 800}], color: '#67beef'},
+        {p: [{x: 800, y:0}, {x: 800, y: 400}, {x: 600, y: 600}, {x: 600, y: 200}], color: '#ef3d61'},
+        {p: [{x: 600, y:200}, {x: 600, y: 600}, {x: 400, y: 400}], color: '#f9f51a'},
+        {p: [{x: 400, y:400}, {x: 600, y: 600}, {x: 400, y: 800}, {x: 200, y: 600}], color: '#a594c0'},
+        {p: [{x: 200, y:600}, {x: 400, y: 800}, {x: 0, y: 800}], color: '#fa8eee'},
+        {p: [{x: 800, y:400}, {x: 800, y: 800}, {x: 400, y: 800}], color: '#f6ca29'}
+    ];
+    const canvas = document.querySelector('#canvas');
+    canvas.width = 800;
+    canvas.height = 800;
+    const context = canvas.getContext('2d');
+
+    for (let i of drawData) {
+        draw(i, context)
+    }
+    function draw(detailData, cxt) {
+        cxt.beginPath();
+        cxt.moveTo(detailData.p[0].x, detailData.p[0].y);
+        for (let i of detailData.p) {
+            cxt.lineTo(i.x, i.y);
+        }
+        cxt.closePath();
+        cxt.fillStyle = detailData.color;
+        cxt.fill()
+
+        cxt.strokeStyle = 'black';
+        cxt.lineWidth = 3;
+        cxt.stroke();
+    }
+</script>
+</html>

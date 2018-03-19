@@ -12,12 +12,19 @@
     </style>
 </head>
 <body>
-<div class="test"></div>
+<canvas></canvas>
 <script>
-    const dom = document.querySelector('.test');
-    dom.addEventListener('click', function () {
-        console.log(this)
-    }, this)
+     const canvas = document.querySelector('canvas');
+     const context = canvas.getContext('2d');
+
+     canvas.width = 400;
+     canvas.height = 400;
+
+     context.moveTo(100, 100);
+     context.lineTo(300, 300);
+
+     context.strokeStyle = 'red';
+     context.stroke()
 
 </script>
 </body>

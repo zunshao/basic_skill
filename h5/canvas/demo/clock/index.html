@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas></canvas>
+<script src="./js/digit.js"></script>
+<script>
+    const WINDOW_WIDTH = 1024;
+    const WINDOW_HEIGHT = 768;
+    const RADIUS = 8;
+    const MARGIN_TOP = 60;
+    const MARGIN_LEFT = 30;
+
+    const canvas = document.querySelector('canvas');
+    const context = canvas.getContext('2d');
+
+    let curShowTimeSeconds = 0;
+    const recordTime = [];
+
+    canvas.width = WINDOW_WIDTH;
+    canvas.height = WINDOW_HEIGHT;
+    curShowTimeSeconds = getCurrentShowTimeSeconds('2018-3-20');
+    
+
+    setInterval(function () {
+        render(context);
+        update();
+    }, 50)
+
+    function update() {
+        var nextShowTimeSeconds = getCurrentShowTimeSeconds('2018-3-20')
+        let hours = parseInt(nextShowTimeSeconds / 3600);
+        let minutes = parseInt((nextShowTimeSeconds - hours * 3600) / 60);
+        let seconds = nextShowTimeSeconds % 60;
+        if (seconds !== recordTime[2]) {
+            if (hours !== recordTime[0]) {// 小时修改
+                if ((hours + '').split('')[0] !== (recordTime[0] + '').split('')[0]) {
+                    addBalls(MARGIN_LEFT, MARGIN_TOP, parseInt(hours / 10))
+                } else {
+                    addBalls(MARGIN_LEFT  + 15 * (RADIUS + 1), MARGIN_TOP, parseInt(hours % 10))
+                }
+            }
+
+            if (minutes !== recordTime[1]) {// 小时修改
+                if ((minutes + '').split('')[0] !== (recordTime[1] + '').split('')[0]) {
+                    addBalls(MARGIN_LEFT  + 39 * (RADIUS + 1), MARGIN_TOP, parseInt(minutes / 10))
+                } else {
+                    addBalls(MARGIN_LEFT  + 54 * (RADIUS + 1), MARGIN_TOP, parseInt(minutes % 10))
+                }
+            }
+
+            if (seconds !== recordTime[2]) {// 小时修改
+                if ((hours + '').split('')[0] !== (recordTime[2] + '').split('')[0]) {
+                    addBalls(MARGIN_LEFT  + 78 * (RADIUS + 1), MARGIN_TOP, parseInt(seconds / 10))
+                } else {
+                    addBalls(MARGIN_LEFT  + 93 * (RADIUS + 1), MARGIN_TOP, parseInt(seconds % 10))
+                }
+            }
+
+
+            curShowTimeSeconds = nextShowTimeSeconds;
+        }
+    }
+
+    function getCurrentShowTimeSeconds(dateStr) {
+        var endTime = new Date(dateStr);
+        var curTime = new Date();
+        var ret = endTime.getTime() - curTime.getTime();
+        ret =  Math.round(ret / 1000);
+        return ret >= 0 ? ret : 0;
+    }
+
+    function render(cxt) {
+        cxt.clearRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+        let hours = parseInt(curShowTimeSeconds / 3600);
+        let minutes = parseInt((curShowTimeSeconds - hours * 3600) / 60);
+        let seconds = curShowTimeSeconds % 60;
+        recordTime[0] = hours;
+        recordTime[1] = minutes;
+        recordTime[2] = seconds;
+
+        renderDigit(MARGIN_LEFT, MARGIN_TOP, parseInt(hours / 10), cxt);
+        renderDigit(MARGIN_LEFT  + 15 * (RADIUS + 1), MARGIN_TOP, parseInt(hours % 10), cxt);
+        renderDigit(MARGIN_LEFT  + 30 * (RADIUS + 1), MARGIN_TOP, 10, cxt);
+        renderDigit(MARGIN_LEFT  + 39 * (RADIUS + 1), MARGIN_TOP, parseInt(minutes / 10), cxt);
+        renderDigit(MARGIN_LEFT  + 54 * (RADIUS + 1), MARGIN_TOP, parseInt(minutes % 10), cxt);
+        renderDigit(MARGIN_LEFT  + 69 * (RADIUS + 1), MARGIN_TOP, 10, cxt);
+        renderDigit(MARGIN_LEFT  + 78 * (RADIUS + 1), MARGIN_TOP, parseInt(seconds / 10), cxt);
+        renderDigit(MARGIN_LEFT  + 93 * (RADIUS + 1), MARGIN_TOP, parseInt(seconds % 10), cxt);
+    }
+
+    function renderDigit(x, y, num, cxt) {
+        cxt.fillStyle = "rgb(0, 102, 153)";
+        for (var i = 0, lenI = digit[num].length; i < lenI; i++) {
+            var temRe = digit[num][i];
+            for (var j = 0, lenJ = temRe.length; j < lenJ; j++) {
+                if (temRe[j] === 1) {
+                    let CenterX = x + j * 2 * (RADIUS + 1) + (RADIUS + 1);
+                    let CenterY = y + i * 2 * (RADIUS + 1) + (RADIUS + 1);
+                    cxt.beginPath();
+                    cxt.arc(CenterX, CenterY, RADIUS, 0, 2 * Math.PI);
+                    cxt.closePath();
+                    cxt.fill();
+                }
+            }
+        }
+    }
+
+</script>
+</body>
+</html>
