@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var observe = {}
+    observe.clientList = {}
+    observe.listen = function (key, fn) {//生成订阅者事件容器并添加
+      if (!this.clientList[key]) {
+        this.clientList[key] = []
+      }
+      this.clientList[key].push(fn)
+    }
+
+    observe.trigger = function () {
+      var key = Array.prototype.shift.call(arguments)
+      var fns = this.clientList[key]
+      if (!fns || fns.length === 0) {
+        return false;
+      }
+      for (var i = 0, fn; fn = fns[i++];) {
+        fn.apply(this, arguments)//apply借用方法，此时arguments已删除第一个参数
+      }
+    }
+
+    observe.listen('zhang', function (a) {
+      console.log(a, 'zhang1')
+    })
+    observe.listen('zhang', function (a) {
+      console.log(a, 'zhang2')
+    })
+    observe.listen('xu', function (a) {
+      console.log(a, 'xu1')
+    })
+
+    observe.trigger('zhang', 20)
+    observe.trigger('xu', 20)
+    /* 
+      通过添加key将所有的订阅者隔离，并依次创建其订阅事件的容器
+      个人喜欢用对象的形式写函数参数
+      添加shift取第一个参数并删除，略增加阅读难度
+
+      这段函数的缺点：
+        订阅者可能会订阅多个对象的事件
+        再另外创建对象然后添加订阅者key，事件显然不合理
+        参考observe_isolation.html
+     */
+  </script>
+</body>
+
+</html>

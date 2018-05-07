@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var c = {}
+    var observeObj = {}
+    observeObj.excuteFuncContainer = []
+    observeObj.listen = function (fn) {
+      this.excuteFuncContainer.push(fn)
+    }
+    observeObj.trigger = function () {
+      for (var i = 0, fn; fn = this.excuteFuncContainer[i++];) {
+        // apply借用fn方法传参，改为：fu.apply(null, arguments)更好理解
+        fn.apply(this, arguments)
+      }
+    }
+    observeObj.listen(function (a) {
+      console.log('observer1', a)
+    })
+    observeObj.listen(function (a) {
+      console.log('observer2', a)
+    })
+    observeObj.trigger(100)
+    /* 
+      运行结果：
+        observer1 100
+        observer2 100
+      明显我们目的在于只给订阅者发送其订阅的相关消息，我们有必要添加observer_key,参考basic_key.html
+     */
+  </script>
+</body>
+
+</html>

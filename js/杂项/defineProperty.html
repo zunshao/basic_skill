@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 基本格式
+    // Object.defineProperty(object, propertyname, descriptor)
+    // 如下，官方推荐格式
+    /*var newLine = "<br />";
+    var obj = {};
+    Object.defineProperty(obj, "newAccessorProperty", {
+        set: function (x) {
+            document.write("in property set accessor" + newLine);
+            this.newaccpropvalue = x;
+            console.log(this)
+        },
+        get: function () {
+            document.write("in property get accessor" + newLine);
+            return this.newaccpropvalue;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    obj.newAccessorProperty = 30;
+    document.write("Property value: " + obj.newAccessorProperty + newLine);*/
+
+    var person = {
+        name: 'zhang',
+        age: 18
+    }
+
+    Object.keys(person).forEach(function (pro) {
+        person[`_${pro}`] = person[pro]
+        Object.defineProperty(person, pro, {
+            get: function (){
+                console.log(`this is getting ${pro} value`)
+                console.log(this)
+                return this[`_${pro}`]
+            },
+            set: function (value) {
+                console.log(`this is setting ${pro} value`)
+                this[`_${pro}`] = value
+            },
+            enumerable: true,
+            configurable: true
+        })
+    })
+    console.log(person.age)
+    person.age = 5657
+</script>
+</body>
+</html>

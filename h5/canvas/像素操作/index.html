@@ -1,0 +1,34 @@
+<html>
+<meta charset="UTF-8">
+<head></head>
+<body>
+
+<canvas id="myCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+    var c=document.getElementById("myCanvas");
+    var ctx=c.getContext("2d");
+    ctx.fillStyle="green";
+    ctx.fillRect(10,10,50,50);
+
+    function copy()
+    {
+        var imgData=ctx.getImageData(10,10,50,50);
+        var createData = ctx.createImageData(50, 50);
+        for (let i = 0, lenI = createData.data.length; i < lenI; i+=4) {
+            createData.data[i + 0] = 0
+            createData.data[i + 1] = 128
+            createData.data[i + 2] = 0
+            createData.data[i + 3] = 255
+        }
+        ctx.putImageData(imgData,10,70);
+        ctx.putImageData(createData,70,70);
+    }
+</script>
+
+<button onclick="copy()">复制</button>
+
+</body>
+</html>

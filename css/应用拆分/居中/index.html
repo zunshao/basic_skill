@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .word-center{
+            width: 300px;
+            line-height: 1;
+            border: 1px solid seagreen;
+            text-align: center;
+        }
+        .parent{
+            width: 600px;
+            height: 400px;
+            border: 1px solid darkblue;
+            background: darkgray;
+        }
+        .child{
+            width: 300px;
+            height: 200px;
+            background: antiquewhite;
+        }
+        .table-cell{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .table-cell .show-info{
+            margin: 0 auto;
+        }
+        .translate{
+            width: 300px;
+            height: 200px;
+            background: antiquewhite;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);/*这里补充一下？？？*/
+        }
+        .flex{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg1{
+            background: green url('./img/1.jpg') no-repeat center center / contain;
+        }
+        .bg2{
+            background: green url('./img/2.png') no-repeat center center / contain;
+        }
+
+    </style>
+</head>
+<body>
+<div class="word-center">文字居中</div>
+<div class="table-cell parent">
+    <div class="show-info child">display: table-cell</div>
+</div>
+<div class="table-cell1 parent">
+    <div class="translate">translate</div>
+</div>
+<div class="flex parent">
+    <div class="child">display: flex</div>
+</div>
+<div class="parent" style="position: relative">
+    <div class="child" style="position: absolute;left:0;right:0;top:0;bottom:0;margin: auto;">margin: auto</div>
+</div>
+
+<div style="width:300px;height:300px;line-height: 300px;border: 1px solid red;">
+    <img src="img/1.jpg" style="display: inline-block;vertical-align: middle;max-width: 100%;max-height: 100%;">
+</div>
+<div style="width:300px;height:300px;line-height: 300px;border: 1px solid red;text-align: center;">
+    <img src="img/2.png" style="display: inline-block;vertical-align: middle;max-width: 100%;max-height: 100%;">
+</div>
+
+<div style="width:300px;height:300px;border: 1px solid red;">
+    <img src="img/1.jpg" style="max-width: 100%;max-height: 100%;position: relative;left: 50%; top: 50%;transform: translate(-50%, -50%);">
+</div>
+<div style="width:300px;height:300px;border: 1px solid red;">
+    <img src="img/2.png" style="max-width: 100%;max-height: 100%;position: relative;left: 50%; top: 50%;transform: translate(-50%, -50%);">
+</div>
+<div class="bg1" style="width:300px;height:300px;"></div>
+<div class="bg2" style="width:300px;height:300px;"></div>
+</body>
+</html>

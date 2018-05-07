@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var arr = [1,2,3,3,4,5,6,NaN,NaN,2,2,'1']
+    function filtRepeate(arr) {
+        return [...new Set(arr)]
+    }
+    //console.log(filtRepeate(arr))
+
+    /*对于number 去重用reduce*/
+    var aNum = [1,2,2,3,4,5,5,4,6,6,7]
+    function filtNum(arr) {
+        var bb = arr.sort((a, b) => {return a - b}).reduce(function (re, current, index) {
+            if (!re.length || re[re.length - 1] !== current) {
+                re.push(current)
+            }
+            return re
+        }, [])
+    }
+
+    var testArr = [1,'1','1',2,3,4,{},{},[]]
+    function filterObj(arr) {
+        var bb = arr.reduce(function (re, current) {
+            if(!re[current]) {
+                re.result.push(current)
+                re[current] = true
+            }
+            return re
+        }, {result:[]})
+        return bb.result;
+    }
+    filterObj(testArr)
+</script>
+</body>
+</html>

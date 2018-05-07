@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 300px;
+            padding:20px;
+            border: 10px dotted rgba(0, 0, 255, 0.5);
+            background: green;
+            float: left;   
+        }
+        .text{
+            background: url('./111.png') no-repeat center;
+            background-size: cover;
+        }
+        .text1{
+            background-clip: border-box;
+        }
+        .text2{
+            background-clip: content-box;
+        }
+        .text3{
+            background-clip: padding-box;
+        }
+        .text4{
+            background-origin: border-box;
+        }
+        .text5{
+            background-origin: content-box;
+        }
+        .text6{
+            background-origin: padding-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="text1">
+        background-clip:border-box<br/>
+        default<br/>
+    </div>
+    <div class="text2">background-clip:content-box</div>
+    <div class="text3">background-clip:padding-box</div>
+    <div class="text4 text">
+        background-origin:border-box<br/>
+        default<br/>
+        用得比较少<br/>
+        自测只在y方向上有效果<br/>
+    </div>
+    <div class="text5 text">background-origin:content-box</div>
+    <div class="text6 text">background-origin:padding-box</div>
+</body>
+</html>

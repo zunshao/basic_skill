@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        input[type='checkbox']{
+            display: none;
+        }
+        input[type='radio']{
+            display: none;
+        }
+        .checkbox{
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            position: relative;
+            margin-right: 200px;
+            background: darkmagenta;
+            transition: background .5s linear;
+        }
+        input[type='checkbox']:checked + label{
+            background: darkorange;
+        }
+        .checkbox::after{
+            content: attr(data-name);
+            display: block;
+            width: 120px;
+            height: 60px;
+            margin-left: 70px;
+            vertical-align: middle;
+            line-height: 60px;
+        }
+        .radio{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid #333;
+            border-radius: 50%;
+            position: relative;
+        }
+        .radio::after{
+            transition: all .5s ease;
+            cursor: pointer;
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            left:50%;
+            top: 50%;
+            height: 50%;
+            transform: translate(-50%, -50%);
+            content: '';
+            border: 1px solid #333;
+        }
+        input[type="radio"]:checked + label::after{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="checkbox01" />
+    <label for="checkbox01" data-name="checkBoxInfo" class="checkbox"></label>
+    <input type="checkbox" id="checkbox02" />
+    <label for="checkbox02" data-name="checkBoxInfo" class="checkbox"></label>
+    <input type="radio" id="radio" name="test">
+    <label for="radio" class="radio"></label>
+    <input type="radio" id="radio1" name="test">
+    <label for="radio1" class="radio"></label>
+</body>
+</html>

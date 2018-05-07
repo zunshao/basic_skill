@@ -1,0 +1,39 @@
+（1）多个文件如保设置运行入口？
+  通过launch.json[configurations][program]来进行设置
+
+（2）如何运行？
+  打开命令行工具（右下角最右），切换到 终端TAG
+  运行curl http://localhost:3000
+  注意网址写全。
+
+（3）断点设置
+  右击选择 表达式/命中次数，回车确认
+
+（4）忽略文件(skipFiles)
+  如下配置
+  {
+    version: 0.2.0,
+    configurations: [
+      {
+        type: 'node',
+        request: 'launch',
+        name: 'debug-app',
+        program: '${workspaceRoot}/app.js',
+        skipFiles: [
+          '${workspaceRoot}/node_modules/**/*.js',
+          '<node_internals>/**/*.js'
+        ]
+      }
+    ]
+  }
+
+  （5）自动启动（测试有问题，暂时不考虑）
+    一，全局安装nodemon npm i nodemon -g
+    二，添加字段：
+        'runtimeExecutable': 'nodemon',
+        'restart': true,
+        'console': 'integatedTerminal'
+
+参考文档
+  https://code.visualstudio.com/docs/editor/debugging
+  https://code.visualstudio.com/docs/nodejs/nodejs-debugging

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .text{
+            width: 20vw;
+            height: 20vw;
+            margin: 20px;
+            float: left;
+        }
+        .test1{
+            background: url("./test_bg.png") no-repeat #58a;
+            background-position: right 2vw bottom 2vw;
+            background-size: 10vw 10vw;
+        }
+        .test2{
+            background: url("./test_bg.png")
+                        no-repeat bottom right #58a;
+            background-position: right 2vw bottom 2vw;
+        }
+        .test3{
+            padding: 2vw;
+            background: url("./test_bg.png") no-repeat bottom right #58a;
+            background-origin: content-box;
+        }
+        .test4{
+            background: url("./test_bg.png") 
+                        no-repeat bottom right #58a;
+            background-position: calc(100% - 2vw) calc(100% - 2vw);
+        }
+        .test{
+            width: 20vw;
+            height:20vw;
+            float: left;
+            background: url("./2.png") no-repeat center #58a;
+        }
+        .size_contain{
+            background-size: contain;
+        }
+        .size_cover{
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="text test1">
+        自适应如保解决???<br>
+        background-size:value value;可以解决<br>
+        上述解决方案，图片将完全铺满设置容器，如cover contain相互补充<br>
+        虽可以保证铺满容器，但失真初始宽高比，个人感觉使用场景不大
+    </div>
+    <div class="text test2">
+        兼容background-position<br>
+    </div>
+    <div class="text test3">
+        background-origin解决方案<br>
+    </div>
+    <div class="text test4">
+        background-position 采用calc解决方案<br>
+    </div>
+    <div class="test size_contain">
+        保持图片宽高比首选方案<br>
+    </div>
+    <div class="test size_cover">
+        保证图片铺满容器，首选方案
+    </div>
+</body>
+</html>

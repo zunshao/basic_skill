@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .test{
+            width: 20vw;
+            height: 20vw;
+            float: left;
+            margin-left: 1vw;
+            margin-top: 1vw;
+        }
+        .test-default{
+            background: linear-gradient(#fb3,#58a);
+        }
+        .test-bg{
+            background: linear-gradient(#fb3 50%,#58a 50%);
+        }
+        .test-1{
+            background: linear-gradient(#fb3 50%, #58a 50%);
+            background-size: 100% 20%;
+        }
+        .test-2{
+            background: linear-gradient(#fb3 30%, #58a 30%);
+            background-size: 100% 20%;
+        }
+        .test-vertical{
+            background: linear-gradient(90deg,#fb3 50%, #58a 50%);
+            background-size: 20% 100%;
+        }
+        .test-incline{
+            background: linear-gradient(45deg,#fb3 25%, #58a 0,
+                                              #58a 50%, #fba 0,
+                                              #fb3 75%, #58a 0);
+            background-size: 20% 20%;
+        }
+        .test-incline1{
+            background: linear-gradient(45deg,#fb3 50%, #58a 50%);
+            background-size: 20% 20%;
+        }
+    </style>
+</head>
+<body>
+    <div class="test test-default">
+        default<br>
+    </div>
+    <div class="test test-bg">
+        <br>
+    </div>
+    <div class="test test-1">
+        background: linear-gradient(#fb3 50%, #58a 50%);<br>
+        background-size: 100% 20%;<br>
+        vw单位计算PX，不完美的原因
+    </div>
+    <div class="test test-2">
+        background: linear-gradient(#fb3 30%, #58a 30%);<br>
+        background-size: 100% 20%;<br>
+    </div>
+    <div class="test test-vertical">
+        background: linear-gradient(90deg,#fb3 50%, #58a 50%);<br>
+        background-size: 20% 100%;<br>
+    </div>
+    <div class="test test-incline1">
+        background: linear-gradient(45deg,#fb3 50%, #58a 50%);<br>
+        background-size: 20% 20%;<br>
+    </div>
+    <div class="test test-incline">
+        四个颜色拼接成上图小矩形即可<br>
+    </div>
+    
+</body>
+</html>

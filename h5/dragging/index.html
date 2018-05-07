@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="js/iconfont.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="left">
+			<div class="left-child"></div>
+			<div class="left-child"></div>
+			<div class="left-child"></div>
+			<div class="left-child"></div>
+			<div class="left-child"></div>
+		</div>
+		<div class="right" id="dragTest" draggable="false">
+			<div class="right-child" draggable="true">
+				<div class="svg-container">
+					<svg class="icon" aria-hidden="true">
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-Operationandmaintenancemanagement"></use>
+					</svg>
+				</div>
+				<span class="showTitle">实时位置</span>
+			</div>
+			<div class="right-child" draggable="true" >
+				<div class="svg-container">
+					<svg class="icon" aria-hidden="true">
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-realtimemonitoring"></use>
+					</svg>
+				</div>
+				<span class="showTitle">告警记录</span>
+			</div>
+			<div class="right-child" draggable="true" >
+				<div class="svg-container">
+					<svg class="icon" aria-hidden="true">
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-SystemManagement"></use>
+					</svg>
+				</div>
+				<span class="showTitle">历史轨迹</span>
+			</div>
+			<div class="right-child" draggable="true" >
+				<div class="svg-container">
+					<svg class="icon" aria-hidden="true">
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-Reportmanagement"></use>
+					</svg>
+				</div>
+				<span class="showTitle">个性化</span>
+			</div>
+			<div class="right-child" draggable="true" >
+				<div class="svg-container">
+					<svg class="icon" aria-hidden="true">
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-Maintenancemanagement"></use>
+					</svg>
+				</div>
+				<span class="showTitle">车辆自检</span>
+			</div>
+			<div class="right-child" draggable="true" >
+				<div class="svg-container">
+					<svg class="icon" aria-hidden="true">
+						<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-economic"></use>
+					</svg>
+				</div>
+				<span class="showTitle">电子围栏</span>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	/*
+	* method:       dragging repeated,drop target element changed to it's childNode,this method will find origin drop target element
+	* @dom          dragging dom object
+	* @className    drop target element's className
+	* */
+	function getNode(dom,className) {
+		while(dom.className!=className && dom.parentNode){
+			dom = dom.parentNode;
+		}
+		return dom;
+	}
+
+	//dragstart event's callback
+	function dragDom(e) {
+		let clickDom = e.target;
+		let strF = clickDom.getElementsByClassName('svg-container')[0].innerHTML;
+		let strS = clickDom.getElementsByClassName('showTitle')[0].innerHTML;
+		e.dataTransfer.setData('text',(strF+'+@+'+strS));
+	}
+
+	//dragover event's callback. this will make drop target element valid to accept the dragging element.
+	function canDrop(e) {
+		e.preventDefault();
+	}
+
+	//drop event's callback.without method "canDrop",this will not fired
+	function dropDom(e) {
+		let getDom = getNode(e.target,'left-child');
+		if(getDom){
+			let getInfo = e.dataTransfer.getData('text').split('+@+');
+			let finalInnerHTML = '<div class="pic-container">'+getInfo[0]+'</div><span class="title">'+getInfo[1];
+			getDom.innerHTML = finalInnerHTML;
+			getDom.style.backgroundColor = 'white';
+		}
+	}
+
+	//add event handler
+	function addEventF(className,e_Name,callBack) {
+		let temDom = document.getElementsByClassName(className);
+		if(temDom.length && temDom.length>0){
+			for(let i of temDom){
+				i.addEventListener(e_Name,callBack);
+			}
+		}
+	}
+
+	addEventF('right-child','dragstart',dragDom);
+	addEventF('left-child','dragover',canDrop);
+	addEventF('left-child','drop',dropDom);
+</script>
+</html>

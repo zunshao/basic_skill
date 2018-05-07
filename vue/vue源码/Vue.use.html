@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.use</title>
+</head>
+<body>
+<script>
+    Vue.use = function (plugin) {
+        if (plugin.installed) {
+            return
+        }
+        var args = toArray(arguments, 1);
+        args.unshift(this)
+        if (typeof plugin.install === "function") {
+            plugin.install.apply(plugin, args)
+        } else if (typeof plugin === 'function') {
+            plugin.apply(null, args)
+        }
+        plugin.installed = true
+        return this
+    }
+
+    function toArray(list, start = 0) {
+        var i = list.length - start;
+        var ret = new Array(i);
+        while (i--) {
+            ret[i] = list[i + start]
+        }
+        return ret
+    }
+
+    /*
+    * @plugin 为一个函数或对象，对象的install属性为一个方法
+    * @plugin 的 installed属性，为一个是否已注册的指针，不允许重复注册
+    * @如何传参，在Vue.use(plugin,...args) args为plugin的参数@@@注意学习这种思路
+    * @执行思路，每一个参数为函数表达式，后续为其参数。通过toArray转化（得到传入函数参数的数组），产生新的数组，且不改变arguments对象
+    * @通过 apply 将函数表达式与 toArray得到的参数真实数组合。
+    * */
+</script>
+</body>
+</html>

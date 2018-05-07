@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            background: #dddddd;
+        }
+
+        #canvas {
+            margin-left: 10px;
+            margin-top: 10px;
+            background: #ffffff;
+            border: thin solid #aaaaaa;
+        }
+
+        #glasspane {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            padding: 0px 20px 10px 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: thin solid rgba(0, 0, 0, 0.6);
+            color: #eeeeee;
+            font-family: Droid Sans, Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+            -webkit-box-shadow: rgba(0,0,0,0.5) 5px 5px 20px;
+            -moz-box-shadow: rgba(0,0,0,0.5) 5px 5px 20px;
+            box-shadow: rgba(0,0,0,0.5) 5px 5px 20px;
+        }
+
+        #glasspane h2 {
+            font-weight: normal;
+        }
+
+        #glasspane .title {
+            font-size: 2em;
+            color: rgba(255, 255, 0, 0.8);
+        }
+
+        #glasspane a:hover {
+            color: yellow;
+        }
+
+        #glasspane a {
+            text-decoration: none;
+            color: #cccccc;
+            font-size: 3.5em;
+        }
+
+        #glasspane p {
+            margin: 10px;
+            color: rgba(65, 65, 220, 1.0);
+            font-size: 12pt;
+            font-family: Palatino, Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id='glasspane'>
+        <h2 class='title'>Bouncing Balls</h2>
+
+        <p>One hundred balls bouncing</p>
+
+        <a id='startButton'>Start</a>
+    </div>
+
+    <canvas id='canvas' width='750' height='500'>
+        Canvas not supported
+    </canvas>
+<script>
+    const context = document.querySelector('#canvas').getContext('2d'),
+        startButton = document.querySelector('#startButton'),
+        glassSpan = document.querySelector('#glasspane');
+    let paused = true,
+        circles = [];
+    let requestNextAnimationFrame = (function () {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame ||
+            function (callback, element) {
+                let self = this
+                let start = null
+                let finish = null
+                window.setTimeout(function () {
+                    start += new Date().getTime()
+                    callback(start)
+                    finish += new Date().getTime()
+                    self.timeout = 1000 / 60 - (finish - start)
+                }, self.timeout)
+            }
+    })();
+
+    glassSpan.onclick = function (e) {
+        paused = !paused;
+        startButton.innerText = paused ? 'Start' : 'Stop';
+        requestNextAnimationFrame(animate);
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    /*绘制底背景*/
+    drawBgGrad(context, 'lightgray', 10, 10);
+    /*生成圆*/
+    (function () {
+        for (let i = 0; i < 100; i++) {
+            circles[i] = {
+                x: 100,
+                y: 100,
+                velocityX: 3 * Math.random(),
+                velocityY: 3 * Math.random(),
+                radius: 50 * Math.random(),
+                color: `rgba(${(Math.random() * 255).toFixed(0)}, ${(Math.random() * 255).toFixed(0)}, ${(Math.random() * 255).toFixed(0)}, 1.0)`
+            }
+        }
+    })()
+
+    /*动画函数，用于回调*/
+    function animate() {
+        if (!paused) {
+            context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+            drawBgGrad(context, 'lightgray', 10, 10);
+            circles.forEach(function (circle) {
+                context.beginPath();
+                context.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2, false);
+                context.fillStyle = circle.color;
+                context.fill();
+                adjustPosition(circle);
+            });
+            requestNextAnimationFrame(animate);
+        }
+    }
+    /*每次动画后改变圆位置*/
+    function adjustPosition(circle) {
+        if (circle.x + circle.velocityX + circle.radius > context.canvas.width || circle.x + circle.velocityX - circle.radius < 0) {
+            circle.velocityX = -circle.velocityX;
+        }
+        if (circle.y + circle.velocityY + circle.radius > context.canvas.height || circle.y + circle.velocityY - circle.radius < 0) {
+            circle.velocityY = -circle.velocityY;
+        }
+
+        circle.x += circle.velocityX;
+        circle.y += circle.velocityY;
+    }
+
+    function drawBgGrad(context, color, stepx, stepy) {
+        context.strokeStyle = color;
+        context.lineWidth = 0.5;
+
+        /*vertical*/
+        for (let i = stepx + 0.5; i < context.canvas.width; i += stepx) {
+            context.beginPath();
+            context.moveTo(i, 0);
+            context.lineTo(i, context.canvas.height);
+            context.stroke();
+        }
+
+        /*horizontal*/
+        for (let i = stepy + 0.5; i < context.canvas.height; i += stepy) {
+            context.beginPath();
+            context.moveTo(0, i);
+            context.lineTo( context.canvas.width, i);
+            context.stroke();
+        }
+    }
+</script>
+</body>
+</html>

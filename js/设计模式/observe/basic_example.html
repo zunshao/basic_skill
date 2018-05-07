@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+      假定存在A B C三个独立模块
+      一次请求返回ABC需要的数据
+      一般情况不注意，ABC的业务逻辑容易写在ajax请求中
+      此时再添加D模块，D相关业务逻辑除添加，还需在ajax中补充
+      如果使用观察者模式，D中相关业务逻辑写好后，添加至相关事件队列中即可
+     */
+
+     //举例
+     login.succ(function (data) {
+       A.a(data.a)
+       B.b(data.b)
+       C.c(data.c)
+     })
+     //模块增加后
+     login.succ(function (data) {
+       A.a(data.a)
+       B.b(data.b)
+       C.c(data.c)
+       D.d(data.d)
+     })
+
+     //使用观察者模式
+     $.ajax('http://xxx.com?login', function (data) {
+       login.trigger('loginSucc', data)
+     })
+
+     //各模块独自写业务逻辑
+     var D = (function () {
+       login.listen('loginSucc', function (data) {
+         D.d(data.d)
+       })
+       return {
+         d: function (data) {
+           console.log('...')
+         }
+       }
+     })()
+
+     var A = (function (data) {
+       login.listen('loginSucc', function (data) {
+         A.a(data.a)
+       })
+       return {
+         a: function (data) {
+           console.log('...')
+         }
+       }
+     })()
+  </script>
+</body>
+</html>
