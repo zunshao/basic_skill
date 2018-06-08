@@ -52,7 +52,6 @@
   - some codes
 =======
   - some codes
->>>>>>> branch name
 // head = 号上即为 工作树中的内容，=号之下为将要提交的内容
 ```
 + git commit -amend 
@@ -69,5 +68,11 @@
     + git push -u origin feature-A
 + 获取远程 feature-D分支
     + git checkout -b feature-D origin/feature-D 
++ 新创建的分支提交失败，有可能是初使化失败
+    + git init
++ 接上 本地新建分支，需远程创建然后再提交
+    + git push --upstream origin branchname
++ 合并
+    + git merge --squash branchName
    
         

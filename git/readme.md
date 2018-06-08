@@ -38,7 +38,7 @@
 + git add 添加要提交的文件
     + git add . // include modified new, but except delete
     + git add u // u means update, for all tracked files, except new file
-    + git add -A
+    + git add -A 
     + 前后两种确定是否要添加的文件不建议，要加就手动加上，本身本地修改，而不修改远程也不合理
 + 撤销add后的文件。
     + git reset HEAD <'src'> //(1)将其恢复至未添加状态
