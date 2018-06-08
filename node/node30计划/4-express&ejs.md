@@ -39,3 +39,7 @@ app.set('view engine', 'html');
 + <%= %> 变量解析，将String按HTML解析
 + <%- %> 变量解析，完全将内容显示，类似vue v-text v-html的区别
 + 语法详解：https://github.com/mde/ejs/blob/master/docs/syntax.md
+
+## express 加载静态资源问题
++ app.js 存在 public设定
++ view内的文件，取public的相对路径即可。
