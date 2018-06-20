@@ -7,3 +7,6 @@
     + 容易引起死循环。
     + 可以用watch作为补充
     + 必要时可以在computed中写相关监控业务，不建议
++ element input enter事件
+    + @:key.enter.native="funtionName"
+    + .native 当前dom 触发dom原生事件，与vue及其它第三方组件无关。

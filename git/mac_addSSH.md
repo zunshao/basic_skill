@@ -16,4 +16,4 @@
         + setting --> SSH keys --> Add SSH key
 + 检测 SSH key
     + ssh "your github account"
-        + 出现 You've successfully authenticated. 即可mac_addSSH
+        + 出现 You've successfully authenticated. 即可
